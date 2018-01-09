@@ -56,11 +56,11 @@ public class CmcHttpTest {
         }
 
         List<CoinValue> coinValueList = new ArrayList<>(20);
-        coinValueList.add(new CoinValue("bitcoin", 0.01468867812));
-        coinValueList.add(new CoinValue("ethereum", 0.00448470495));
+        coinValueList.add(new CoinValue("bitcoin", 0.01447147812));
+        coinValueList.add(new CoinValue("ethereum", 0.00445992880));
         coinValueList.add(new CoinValue("bitcoin-cash", 0.01418459812));
         coinValueList.add(new CoinValue("bitcoin-gold", 0.01423370212));
-        coinValueList.add(new CoinValue("ripple", 0.03));
+        coinValueList.add(new CoinValue("ripple", 1.04993000000));
         coinValueList.add(new CoinValue("iota", 28.699000099));
         coinValueList.add(new CoinValue("monero", 0.07404469817));
         coinValueList.add(new CoinValue("zcash", 0.00055643067));
