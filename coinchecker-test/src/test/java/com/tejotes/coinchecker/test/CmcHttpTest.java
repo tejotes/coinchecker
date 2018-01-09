@@ -73,7 +73,7 @@ public class CmcHttpTest {
             CmcCoinInfo coinInfo = coininfoMap.get(coinValue.getCoinId());
             double value = coinValue.getCoinQuantity() * coinInfo.getPriceEur();
             sum += value;
-            String msg = String.format("%12s: %8.3fCU %10.4fEUR/CU (Δh=%+6.2f%% Δd=%+6.2f%%) %8.3fEUR sum=%8.3fEUR",coinInfo.getId(), coinValue.getCoinQuantity(), coinInfo.getPriceEur(), coinInfo.getDelta1hPct(), coinInfo.getDelta1dPct(), value ,sum);
+            String msg = String.format("%12s: %8.3fCU %10.4fEUR/CU (Δh=%+6.2f%% Δd=%+6.2f%% Δw=%+6.2f%%) %8.3fEUR sum=%8.3fEUR",coinInfo.getId(), coinValue.getCoinQuantity(), coinInfo.getPriceEur(), coinInfo.getDelta1hPct(), coinInfo.getDelta1dPct(), coinInfo.getDelta7dPct(), value ,sum);
             System.out.println(msg);
         }
     }
