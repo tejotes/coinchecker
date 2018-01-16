@@ -39,7 +39,7 @@ public class CmcHttpTest {
 
         Double moneroCount = 0.074044698;
         Double moneroEUR = moneroCount * moneroInfo.getPriceEur();
-        System.out.println("moneroEUR="+moneroEUR);
+        System.out.println("moneroEUR=" + moneroEUR);
     }
 
     @Test
@@ -67,14 +67,23 @@ public class CmcHttpTest {
         coinValueList.add(new CoinValue("bitshares", 15.23112816));
         coinValueList.add(new CoinValue("byteball", 0.00223700000));
         coinValueList.add(new CoinValue("dash", 0.004));
+        coinValueList.add(new CoinValue("tenx", 0.0));
 
         double sum = 0.0;
         for (CoinValue coinValue : coinValueList) {
             CmcCoinInfo coinInfo = coininfoMap.get(coinValue.getCoinId());
-            double value = coinValue.getCoinQuantity() * coinInfo.getPriceEur();
-            sum += value;
-            String msg = String.format("%12s: %8.3fCU %10.4fEUR/CU (Δh=%+6.2f%% Δd=%+6.2f%% Δw=%+6.2f%%) %8.3fEUR sum=%8.3fEUR",coinInfo.getId(), coinValue.getCoinQuantity(), coinInfo.getPriceEur(), coinInfo.getDelta1hPct(), coinInfo.getDelta1dPct(), coinInfo.getDelta7dPct(), value ,sum);
-            System.out.println(msg);
+            if (coinInfo != null) {
+                double value = coinValue.getCoinQuantity() * coinInfo.getPriceEur();
+                sum += value;
+                String msg = String.format("%12s: %10.6fCU %10.2fEUR/CU (Δh=%+6.2f%% Δd=%+6.2f%% Δw=%+6.2f%%) %8.2fEUR", coinInfo.getId(), coinValue.getCoinQuantity(), coinInfo.getPriceEur(), coinInfo.getDelta1hPct(), coinInfo.getDelta1dPct(), coinInfo.getDelta7dPct(), value);
+                System.out.println(msg);
+            } else {
+                String message = String.format("%12s: coin currently not available.", coinValue.getCoinId());
+                System.out.println(message);
+            }
         }
+        System.out.println("------------------------------------------------------------------------------------------");
+        String message = String.format("∑                                                                              %8.2fEUR", sum);
+        System.out.println(message);
     }
 }
