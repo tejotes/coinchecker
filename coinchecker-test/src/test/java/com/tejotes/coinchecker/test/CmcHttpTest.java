@@ -56,11 +56,11 @@ public class CmcHttpTest {
         }
 
         List<CoinValue> coinValueList = new ArrayList<>(20);
-        coinValueList.add(new CoinValue("bitcoin", 0.01447147812));
+        coinValueList.add(new CoinValue("bitcoin", 0.01435314542));
         coinValueList.add(new CoinValue("ethereum", 0.00445992880));
         coinValueList.add(new CoinValue("bitcoin-cash", 0.01418459812));
         coinValueList.add(new CoinValue("bitcoin-gold", 0.01423370212));
-        coinValueList.add(new CoinValue("ripple", 1.04993000000));
+        coinValueList.add(new CoinValue("ripple", 2.04993000000));
         coinValueList.add(new CoinValue("iota", 28.699000099));
         coinValueList.add(new CoinValue("monero", 0.07404469817));
         coinValueList.add(new CoinValue("zcash", 0.00055643067));
@@ -75,15 +75,15 @@ public class CmcHttpTest {
             if (coinInfo != null) {
                 double value = coinValue.getCoinQuantity() * coinInfo.getPriceEur();
                 sum += value;
-                String msg = String.format("%12s: %10.6fCU %10.2fEUR/CU (Δh=%+6.2f%% Δd=%+6.2f%% Δw=%+6.2f%%) %8.2fEUR", coinInfo.getId(), coinValue.getCoinQuantity(), coinInfo.getPriceEur(), coinInfo.getDelta1hPct(), coinInfo.getDelta1dPct(), coinInfo.getDelta7dPct(), value);
+                String msg = String.format("%12s: %10.6fCU %12.6fBTC/CU %10.2fUSD/CU %10.2fEUR/CU (Δh=%+6.2f%% Δd=%+6.2f%% Δw=%+6.2f%%) %7.2fEUR", coinInfo.getId(), coinValue.getCoinQuantity(), coinInfo.getPriceBtc(), coinInfo.getPriceUsd(), coinInfo.getPriceEur(), coinInfo.getDelta1hPct(), coinInfo.getDelta1dPct(), coinInfo.getDelta7dPct(), value);
                 System.out.println(msg);
             } else {
                 String message = String.format("%12s: coin currently not available.", coinValue.getCoinId());
                 System.out.println(message);
             }
         }
-        System.out.println("------------------------------------------------------------------------------------------");
-        String message = String.format("∑                                                                              %8.2fEUR", sum);
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        String message = String.format("∑                                                                                                                 %8.2fEUR", sum);
         System.out.println(message);
     }
 }
