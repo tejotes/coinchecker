@@ -4,11 +4,11 @@ package com.tejotes.coinchecker.test;
 import com.google.gson.*;
 import org.junit.Test;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class CmcHttpTest {
 
@@ -56,11 +56,11 @@ public class CmcHttpTest {
         }
 
         List<CoinValue> coinValueList = new ArrayList<>(20);
-        coinValueList.add(new CoinValue("bitcoin", 0.01435314542));
+        coinValueList.add(new CoinValue("bitcoin", 0.01427387812));
         coinValueList.add(new CoinValue("ethereum", 0.00445992880));
         coinValueList.add(new CoinValue("bitcoin-cash", 0.01418459812));
         coinValueList.add(new CoinValue("bitcoin-gold", 0.01423370212));
-        coinValueList.add(new CoinValue("ripple", 2.04993000000));
+        coinValueList.add(new CoinValue("ripple", 2.97185798500));
         coinValueList.add(new CoinValue("iota", 28.699000099));
         coinValueList.add(new CoinValue("monero", 0.07404469817));
         coinValueList.add(new CoinValue("zcash", 0.00055643067));
@@ -68,6 +68,8 @@ public class CmcHttpTest {
         coinValueList.add(new CoinValue("byteball", 0.00223700000));
         coinValueList.add(new CoinValue("dash", 0.004));
         coinValueList.add(new CoinValue("tenx", 0.0));
+
+        System.out.println("============================================================================================================================");
 
         double sum = 0.0;
         for (CoinValue coinValue : coinValueList) {
@@ -82,8 +84,22 @@ public class CmcHttpTest {
                 System.out.println(message);
             }
         }
-        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
-        String message = String.format("∑                                                                                                                 %8.2fEUR", sum);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+        String message = String.format("∑ %s                                                                                             %8.2fEUR", sdf.format(new Date()), sum);
         System.out.println(message);
+        File statFile = new File(System.getProperty("user.home") + "/Documents/coinchecker.log");
+        try (PrintStream statWriter = new PrintStream(new FileOutputStream(statFile, true))) {
+            statWriter.println(message);
+        }
+    }
+
+    @Test
+    public void testCyclic() throws Exception {
+        while (true) {
+            testAll();
+            TimeUnit.MINUTES.sleep(5);
+        }
     }
 }
