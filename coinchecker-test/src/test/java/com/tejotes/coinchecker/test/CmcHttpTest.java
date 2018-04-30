@@ -16,6 +16,8 @@ public class CmcHttpTest {
 
     private final String first100Url = "https://api.coinmarketcap.com/v1/ticker/?convert=EUR";
 
+    private final String first200Url = "https://api.coinmarketcap.com/v1/ticker/?limit=200&convert=EUR";
+
     private final Gson gson = new GsonBuilder()
             .registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (json, typeOfT, context) -> new Date(json.getAsJsonPrimitive().getAsLong() * 1000))
             .registerTypeAdapter(Date.class, (JsonSerializer<Date>) (date, type, jsonSerializationContext) -> new JsonPrimitive(date.getTime() / 1000))
@@ -44,7 +46,7 @@ public class CmcHttpTest {
 
     @Test
     public void testAll() throws Exception {
-        URL url = new URL(first100Url);
+        URL url = new URL(first200Url);
         InputStream input = url.openStream();
         Reader reader = new InputStreamReader(input, "UTF-8");
 
@@ -56,18 +58,22 @@ public class CmcHttpTest {
         }
 
         List<CoinValue> coinValueList = new ArrayList<>(20);
-        coinValueList.add(new CoinValue("bitcoin", 0.01427387812));
-        coinValueList.add(new CoinValue("ethereum", 0.00445992880));
+        coinValueList.add(new CoinValue("bitcoin", 0.0130));
+        coinValueList.add(new CoinValue("ethereum", 0.00745992880));
         coinValueList.add(new CoinValue("bitcoin-cash", 0.01418459812));
         coinValueList.add(new CoinValue("bitcoin-gold", 0.01423370212));
         coinValueList.add(new CoinValue("ripple", 2.97185798500));
+        coinValueList.add(new CoinValue("neo", 0.037));
+        coinValueList.add(new CoinValue("cardano", 12.1));
         coinValueList.add(new CoinValue("iota", 28.699000099));
         coinValueList.add(new CoinValue("monero", 0.07404469817));
         coinValueList.add(new CoinValue("zcash", 0.00055643067));
         coinValueList.add(new CoinValue("bitshares", 15.23112816));
         coinValueList.add(new CoinValue("byteball", 0.00223700000));
         coinValueList.add(new CoinValue("dash", 0.004));
-        coinValueList.add(new CoinValue("tenx", 0.0));
+        coinValueList.add(new CoinValue("tenx", 0.37));
+        coinValueList.add(new CoinValue("eos", 0.118841));
+        coinValueList.add(new CoinValue("tron", 30.0));
 
         System.out.println("============================================================================================================================");
 
@@ -97,9 +103,13 @@ public class CmcHttpTest {
 
     @Test
     public void testCyclic() throws Exception {
+
+        final int sleepIntervalMillis = 300_000;
+
         while (true) {
             testAll();
-            TimeUnit.MINUTES.sleep(5);
+            long sleepMillis = (((System.currentTimeMillis() / sleepIntervalMillis) + 1) * sleepIntervalMillis) - System.currentTimeMillis();
+            TimeUnit.MILLISECONDS.sleep(sleepMillis);
         }
     }
 }
