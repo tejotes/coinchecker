@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <version.junit>4.12</version.junit>
+        <version.junit>4.31.2</version.junit>
         <version.cdi-api>2.0</version.cdi-api>
         <version.javax.persistence-api>2.2</version.javax.persistence-api>
         <version.deltaspike>1.8.0</version.deltaspike>
