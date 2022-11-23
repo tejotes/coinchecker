@@ -19,7 +19,7 @@
         <version.deltaspike>1.8.0</version.deltaspike>
         <version.weld>3.0.1.Final</version.weld>
         <version.eclipselink>2.7.0</version.eclipselink>
-        <version.postgres>42.3.3</version.postgres>
+        <version.postgres>42.3.8</version.postgres>
         <version.gson>2.8.2</version.gson>
         <version.cdi-api>2.0</version.cdi-api>
     </properties>
